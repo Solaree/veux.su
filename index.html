@@ -125,11 +125,14 @@
     }
 
     .card {
+      width: min(90vw, 400px);
       background: var(--card);
       backdrop-filter: blur(var(--blur-lg));
       -webkit-backdrop-filter: blur(var(--blur-lg));
       border: 1px solid var(--card-border);
-      padding: 56px;
+      padding: 36px;
+      align-items: center;
+      justify-content: center;
       border-radius: var(--radius-xl);
       text-align: center;
       box-shadow: var(--shadow-lg);
@@ -240,12 +243,18 @@
     }
 
     .buttons-container {
-      display: grid;
+      display: flex;
+      flex-direction: column;
       gap: 14px;
       margin-top: 28px;
+      width: 100%;
     }
 
     .button {
+      flex: 1;
+      min-width: 0;
+      width: 100%;
+      text-align: center;
       --btn-bg: rgba(0, 184, 255, .12);
       position: relative;
       display: inline-flex;
@@ -254,7 +263,7 @@
       gap: 10px;
       background: var(--btn-bg);
       color: var(--accent);
-      padding: 14px 18px;
+      padding: 14px 0;
       border-radius: 14px;
       text-decoration: none;
       font-size: 16px;
@@ -310,23 +319,23 @@
     }
 
     @media (max-width: 768px) {
+
       .card {
+        width: 90vw;
         padding: 36px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       .avatar {
-        width: 110px;
-        height: 110px;
+        width: 100px;
+        height: 100px;
       }
 
-      .buttons-container {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .buttons-container {
-        grid-template-columns: 1fr;
+      .avatar-wrap {
+        width: 100px;
+        height: 100px;
       }
     }
 
@@ -471,15 +480,17 @@
       requestAnimationFrame(drawStars);
     }
 
+    const starCount = window.innerWidth < 768 ? 80 : 150;
+
     window.addEventListener('load', () => {
       resize();
-      initStars(150);
+      initStars(starCount);
       requestAnimationFrame(drawStars);
     });
 
     window.addEventListener('resize', () => {
       resize();
-      initStars(150);
+      initStars(starCount);
     });
 
     document.addEventListener('DOMContentLoaded', () => {
